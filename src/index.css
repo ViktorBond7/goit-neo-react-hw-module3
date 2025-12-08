@@ -1,3 +1,5 @@
+@import "modern-normalize/modern-normalize.css";
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -13,6 +15,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* *,
+*::before,
+*::after {
+  box-sizing: border-box;
+} */
+
 body {
   margin: 0;
   display: flex;
@@ -21,6 +29,9 @@ body {
   min-height: 100vh;
 }
 
+input {
+  outline: none;
+}
 button {
   cursor: pointer;
   transition: border-color 0.25s;

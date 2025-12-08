@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+/* .label {
+  margin-bottom: 5px;
+} */
+
+.inputSearch {
+  width: 220px;
+  padding: 5px 10px;
+  line-height: 1.5;
+}

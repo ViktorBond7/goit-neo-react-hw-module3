@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  width: 200px;
+  width: 220px;
   justify-content: space-between;
   padding: 5px;
   border: 2px solid rgb(16, 16, 16);
