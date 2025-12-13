@@ -13,4 +13,5 @@ const SearchBox = ({ value, onFilter }) => {
     </div>
   );
 };
+
 export default SearchBox;

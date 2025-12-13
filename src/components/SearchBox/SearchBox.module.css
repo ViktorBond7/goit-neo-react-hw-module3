@@ -4,12 +4,9 @@
   margin-bottom: 20px;
 }
 
-/* .label {
-  margin-bottom: 5px;
-} */
-
 .inputSearch {
-  width: 220px;
+  width: 250px;
   padding: 5px 10px;
   line-height: 1.5;
+  border-radius: 5px;
 }

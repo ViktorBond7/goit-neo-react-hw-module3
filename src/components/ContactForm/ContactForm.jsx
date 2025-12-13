@@ -2,58 +2,61 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import css from "./ContactForm.module.css";
 import { nanoid } from "nanoid";
+import { useId } from "react";
 
 const ContactSchema = Yup.object().shape({
   name: Yup.string()
-    .min(2, "Too Short!")
-    .max(20, "Too Long!")
+    .min(3, "Name must be at least 3 symb long")
+    .max(50, "The name must be no more than 50 characters long")
     .required("Required"),
   number: Yup.string()
-    .required("Required")
-    .matches(/^\+?\d+(?:-\d+)*$/, "Incorrect format!!!"),
+    .min(3, "Number must be at least 3 characters long")
+    .max(50, "Number must be no more than 50 characters long")
+    .required("Required"),
 });
 
 const ContactForm = ({ addContacts }) => {
   const contactId = nanoid();
+  const nameId = useId();
+  const numberId = useId();
 
   const handleSabmit = (value, actions) => {
-    console.log(value);
     addContacts({ ...value, id: contactId });
     actions.resetForm();
   };
 
   return (
-    <>
-      <p>ContactForm</p>
+    <div className={css.container}>
       <Formik
         initialValues={{ name: "", number: "" }}
-        // validate={(values) => {
-        //   const errors = {};
-        //   if (!values.email) {
-        //     errors.email = "Required";
-        //   } else if (
-        //     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-        //   ) {
-        //     errors.email = "Invalid email address";
-        //   }
-        //   return errors;
-        // }}
         onSubmit={handleSabmit}
         validationSchema={ContactSchema}
       >
         {({ isSubmitting }) => (
           <Form className={css.form}>
-            <Field type="text" name="name" />
-            <ErrorMessage className={css.err} name="name" component="div" />
-            <Field type="text" name="number" />
-            <ErrorMessage className={css.err} name="number" component="div" />
-            <button type="submit" disabled={isSubmitting}>
-              Submit
+            <label className={css.label} htmlFor={nameId}>
+              Name
+            </label>
+            <Field className={css.input} type="text" name="name" id={nameId} />
+            <ErrorMessage className={css.err} name="name" component="span" />
+            <label className={css.label} htmlFor={numberId}>
+              Number
+            </label>
+            <Field
+              className={css.input}
+              type="text"
+              name="number"
+              id={numberId}
+            />
+            <ErrorMessage className={css.err} name="number" component="span" />
+            <button className={css.btn} type="submit" disabled={isSubmitting}>
+              Add contact
             </button>
           </Form>
         )}
       </Formik>
-    </>
+    </div>
   );
 };
+
 export default ContactForm;

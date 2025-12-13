@@ -1,6 +1,5 @@
 import css from "./Contact.module.css";
 import { FaUser, FaPhone } from "react-icons/fa6";
-// import { FaPhone } from "react-icons/fa6";
 
 const Contact = ({ data: { name, number, id }, onDelete }) => {
   return (
@@ -19,4 +18,5 @@ const Contact = ({ data: { name, number, id }, onDelete }) => {
     </div>
   );
 };
+
 export default Contact;

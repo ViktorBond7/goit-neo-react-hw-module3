@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import initialContacts from "../src/contacts.json";
-// import * as Yup from "yup";
 
 import "./App.css";
 import ContactForm from "./components/ContactForm/ContactForm";
@@ -10,25 +9,19 @@ import ContactList from "./components/ContactList/ContactList";
 const STOREGE_CONTACTS_KEY = "contacts";
 
 function App() {
-  const [contacts, setContacts] = useState(() =>
-    // JSON.parse(localStorage.getItem(STOREGE_CONTACTS_KEY)) ?? initialContacts
-    {
-      try {
-        const saved = localStorage.getItem(STOREGE_CONTACTS_KEY);
+  const saved = localStorage.getItem(STOREGE_CONTACTS_KEY);
 
-        return saved.length > 2 ? JSON.parse(saved) : initialContacts;
-      } catch {
-        return initialContacts;
-      }
-    }
+  const [contacts, setContacts] = useState(
+    () => JSON.parse(saved) ?? initialContacts
   );
-
-  console.log(initialContacts);
-
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
-    localStorage.setItem(STOREGE_CONTACTS_KEY, JSON.stringify(contacts));
+    if (contacts.length) {
+      localStorage.setItem(STOREGE_CONTACTS_KEY, JSON.stringify(contacts));
+    } else {
+      localStorage.removeItem(STOREGE_CONTACTS_KEY);
+    }
   }, [contacts]);
 
   const visibleContacts = contacts.filter((contact) =>
